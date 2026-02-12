@@ -1,13 +1,12 @@
 import './App.css'
+import Perfil from './components/Perfil/perfil'
 
 function App() {
 
   return (
     <div id='App'>
-      <div className='perfil'>
-        <img src="https://placehold.co/200x200" alt="" />
-        <p>@Seu Nome</p>
-      </div>
+      <Perfil />
+
       <div className='switch'>
         botão switch
       </div>
