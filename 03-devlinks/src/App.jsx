@@ -23,7 +23,7 @@ function App() {
         </ul>
       </div>
 
-      <div className='socialLinks'>
+      <div id="SocialLinks">
         <SocialLink url={"https://github.com/"} icon={"logo-github"} />
         <SocialLink url={"https://www.instagram.com/"} icon={"logo-instagram"} />
         <SocialLink url={"https://www.youtube.com/"} icon={"logo-youtube"} />
