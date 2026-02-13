@@ -1,11 +1,21 @@
 :root{
+    --bg-url: url(./assets/bg-desktop.jpg);
+    --text-color: hsl(0, 0, 0);
+    --stroke-color: rgba(0, 0, 0, 0.5);
+    --surface-color: rgba(0, 0, 0, 0.1);
+    --surface-color-hover: rgba(0, 0, 0, 0.4);
+    --switch-bg-url: url(./assets/MoonStars.svg);
+    --highlight-color: rgba(0, 0, 0, 0.2);
+}
+
+.light{
     --bg-url: url(./assets/bg-desktop-light.jpg);
-    --text-color: hsl(0, 0%, 0%);
+    --text-color: hsl(0, 0, 0);
     --stroke-color: rgba(0, 0, 0, 0.5);
     --surface-color: rgba(0, 0, 0, 0.1);
     --surface-color-hover: rgba(0, 0, 0, 0.4);
     --switch-bg-url: url(./assets/Sun.svg);
-    --highlight-color: rgba(0, 0, 0, 0.2);
+    --highlight-color: rgba(0, 0, 0, 0.2); 
 }
 
 #App{
@@ -23,6 +33,8 @@
     
     font-family: "inter", sans-serif;
     color: var(--text-color);
+
+    transition: background 0.2s;
 }
 
 #Link {
@@ -31,8 +43,8 @@
 
     ul{
         width: 100%;
-
         max-width: 588px;
+
         list-style: none;
         display: flex;
         flex-direction: column;
