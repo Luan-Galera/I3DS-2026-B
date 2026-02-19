@@ -6,6 +6,8 @@ import Rodape from './components/Rodape/Rodape'
 import SocialLink from './components/SocialLink/SocialLink'
 import Switch from './components/Switch/Switch'
 
+import foto from "./assets/Perfil.jpg"
+
 function App() {
   const [isLight, setIsLight] = useState(true);
 
@@ -15,7 +17,7 @@ function App() {
 
   return (
     <div id="App" className={isLight ? "light" : ""}>
-      <Perfil fotoPerfil={"https://placehold.co/100"}>NotFound</Perfil>
+      <Perfil fotoPerfil={foto}>NotFound</Perfil>
 
       <Switch troca={troca} isLight={isLight}/>
       
