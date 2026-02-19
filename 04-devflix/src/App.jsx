@@ -18,7 +18,7 @@ const App = () => {
         <img src={lupa} alt="Botão pesquisar!" />
       </div>
 
-      <Rodape>Luan-Galera</Rodape>
+      <Rodape link="https://github.com/Luan-Galera">Luan-Galera</Rodape>
     </div>
   );
 };
