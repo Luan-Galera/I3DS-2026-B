@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div id="App" className={isLight ? "light" : ""}>
-      <Perfil fotoPerfil={foto}>NotFound</Perfil>
+      <Perfil fotoPerfil={foto}>Luan</Perfil>
 
       <Switch troca={troca} isLight={isLight}/>
       
