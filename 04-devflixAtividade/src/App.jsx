@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-import logo from "./assets/devflix.png";
+import logo from "./assets/ljflix.png";
 import lupa from "./assets/search.svg";
 
 import Rodape from "./components/Rodape/Rodape";
@@ -10,6 +10,7 @@ import MovieCard from "./components/MovieCard/MovieCard";
 const App = () => {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
+  const [translateEnabled, setTranslateEnabled] = useState(false);
 
   //Utilizando uma CHAVE de API do arquivo .env
   const apiKey = import.meta.env.VITE_OMDB_API_KEY;
@@ -25,11 +26,18 @@ const App = () => {
   };
 
   useEffect(() => {
-    searchMovies("Black Clover"); // termo para pesquisa ao carregar o site
+    searchMovies("Spider-Man"); // termo para pesquisa ao carregar o site
   }, []);
 
   return (
     <div id="App">
+      <button
+        className={`translateToggle ${translateEnabled ? "flagPt" : "flagEn"}`}
+        onClick={() => setTranslateEnabled((prev) => !prev)}
+        title={translateEnabled ? "Idioma exibido: Português (Brasil)" : "Idioma exibido: English"}
+        aria-label={translateEnabled ? "Idioma exibido: Português (Brasil)" : "Idioma exibido: English"}
+      />
+
       <img
         id="Logo"
         src={logo}
@@ -44,7 +52,7 @@ const App = () => {
       {movies?.length > 0 ? (
         <div className="container">
           {movies.map((movie, index) => (
-            <MovieCard key={index} {...movie} apiUrl={apiUrl}/>
+            <MovieCard key={index} {...movie} apiUrl={apiUrl} translateEnabled={translateEnabled}/>
           ))}
         </div>
       ) : (

@@ -3,12 +3,12 @@
   --font-raleway: "Raleway", sans-serif;
 
   /* Light theme (padrão) */
-  --bg-primary: #f5f5f5;
+  --bg-primary: #e9e6e6;
   --bg-secondary: #ffffff;
-  --text-primary: #333;
-  --text-secondary: #666;
-  --text-placeholder: #a1a1a1;
-  --accent-color: #ff6b6b;
+  --text-primary: #2e2e2e;
+  --text-secondary: #5c5c5c;
+  --text-placeholder: #8a8a8a;
+  --accent-color: #a286e2;
   --shadow-color: rgba(0, 0, 0, 0.1);
   --shadow: 0px 2px 8px var(var(--shadow-color));
 }
@@ -16,14 +16,14 @@
 @media (prefers-color-scheme: dark) {
   /* Dark theme */
   :root {
-    --bg-primary: #212426;
-    --bg-secondary: #343739;
+    --bg-primary: #272727;
+    --bg-secondary: #404547;
     --text-primary: #f5f5f5;
     --text-secondary: #f0f0f0;
-    --text-placeholder: #a1a1a1;
-    --accent-color: #ffa500;
+    --text-placeholder: #b4b4b4;
+    --accent-color: #ffd78e;
     --shadow-color: rgba(0, 0, 0, 0.4);
-    --shadow: 5px 5px 7px #1c1d1f, -5px -5px 7px #222527;
+    --shadow: 5px 5px 7px #1c1d1f, -5px -5px 7px #212324;
   }
 }
 
@@ -45,6 +45,40 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.translateToggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  width: 46px;
+  height: 46px;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.translateToggle:hover {
+  transform: scale(1.06);
+}
+
+.translateToggle.flagPt {
+  background-image: url("https://flagcdn.com/w80/br.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.translateToggle.flagEn {
+  background-image: url("https://flagcdn.com/w80/us.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 #Logo {

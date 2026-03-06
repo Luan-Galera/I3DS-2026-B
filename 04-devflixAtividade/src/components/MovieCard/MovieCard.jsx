@@ -1,12 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./MovieCard.module.css";
 import MovieDescription from "../MovieDescription/MovieDescription";
+import { translateAutoText } from "../../utils/translator";
 
 const MovieCard = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [translatedType, setTranslatedType] = useState(props.Type);
   // console.log(isModalOpen);
 
   const toogleModal = () => setIsModalOpen(!isModalOpen);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const run = async () => {
+      if (!props.translateEnabled) {
+        if (isMounted) setTranslatedType(props.Type);
+        return;
+      }
+
+      const result = await translateAutoText(props.Type, "pt");
+      if (isMounted) setTranslatedType(result || props.Type);
+    };
+
+    run();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [props.Type, props.translateEnabled]);
 
   return (
     <>
@@ -20,7 +42,7 @@ const MovieCard = (props) => {
         </div>
 
         <div>
-          <span>{props.Type}</span>
+          <span>{translatedType}</span>
           <h3>{props.Title}</h3>
         </div>
       </div>
@@ -30,6 +52,7 @@ const MovieCard = (props) => {
           apiUrl={props.apiUrl}
           movieID={props.imdbID}
           click={toogleModal}
+          translateEnabled={props.translateEnabled}
         />
       )}
     </>
