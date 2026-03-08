@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./MovieDescription.module.css";
-import { translateAutoText } from "../../utils/translator";
+import { translateBatch } from "../../utils/translator";
 
 const MovieDescription = (props) => {
   const [movieDesc, setMovieDesc] = useState([]);
@@ -13,7 +13,7 @@ const MovieDescription = (props) => {
       .then((response) => response.json())
       .then((data) => setMovieDesc(data))
       .catch((error) => console.error(error));
-  }, []);
+  }, [props.apiUrl, props.movieID]);
 
   useEffect(() => {
     let isMounted = true;
@@ -21,7 +21,7 @@ const MovieDescription = (props) => {
     const run = async () => {
       if (!movieDesc || !movieDesc.Title) return;
 
-      if (!props.translateEnabled) {
+      if (props.language === "en") {
         if (isMounted) {
           setTranslatedType(movieDesc.Type);
           setTranslatedGenre(movieDesc.Genre);
@@ -30,11 +30,10 @@ const MovieDescription = (props) => {
         return;
       }
 
-      const [typeResult, genreResult, plotResult] = await Promise.all([
-        translateAutoText(movieDesc.Type, "pt"),
-        translateAutoText(movieDesc.Genre, "pt"),
-        translateAutoText(movieDesc.Plot, "pt"),
-      ]);
+      const [typeResult, genreResult, plotResult] = await translateBatch(
+        [movieDesc.Type, movieDesc.Genre, movieDesc.Plot],
+        props.language,
+      );
 
       if (isMounted) {
         setTranslatedType(typeResult || movieDesc.Type);
@@ -48,16 +47,31 @@ const MovieDescription = (props) => {
     return () => {
       isMounted = false;
     };
-  }, [movieDesc, props.translateEnabled]);
+  }, [movieDesc, props.language]);
+
+  const labels = props.labels || {
+    watch: "Watch",
+    rating: "Rating",
+    duration: "Duration",
+    cast: "Cast",
+    genre: "Genre",
+    plot: "Synopsis",
+  };
 
   return (
     <div className={styles.modalBackdrop} onClick={props.click}>
-      <div className={styles.movieModal} onClick={(e) => e.stopPropagation()}>
+      <div
+        className={styles.movieModal}
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Detalhes do filme"
+      >
         <div className={styles.movieInfo}>
           <img src={movieDesc.Poster} alt="" />
 
-          <button className={styles.btnClose} onClick={props.click}>
-            X
+          <button className={styles.btnClose} onClick={props.click} aria-label="Fechar detalhes do filme">
+            ×
           </button>
 
           <div className={styles.movieType}>
@@ -68,24 +82,25 @@ const MovieDescription = (props) => {
               <a
                 href={`https://google.com/search?q=${encodeURIComponent(movieDesc.Title)}`}
                 target="_blank"
+                rel="noreferrer"
               >
-                ▶️ Assistir
+                ▶️ {labels.watch}
               </a>
             </div>
           </div>
         </div>
         <div className={styles.containerMisc}>
           <div className={styles.containerFlex}>
-            Avaliação: {movieDesc.imdbRating} | Duração: {movieDesc.Runtime} |{" "}
+            {labels.rating}: {movieDesc.imdbRating} | {labels.duration}: {movieDesc.Runtime} |{" "}
             {movieDesc.Released}
           </div>
           <div className={styles.containerFlex}>
-            <p>Elenco: {movieDesc.Actors}</p>
-            <p>Gênero: {translatedGenre || movieDesc.Genre}</p>
+            <p>{labels.cast}: {movieDesc.Actors}</p>
+            <p>{labels.genre}: {translatedGenre || movieDesc.Genre}</p>
           </div>
         </div>
         <div className={styles.desc}>
-          <p>Sinopse: {translatedPlot || movieDesc.Plot}</p>
+          <p>{labels.plot}: {translatedPlot || movieDesc.Plot}</p>
         </div>
       </div>
     </div>
