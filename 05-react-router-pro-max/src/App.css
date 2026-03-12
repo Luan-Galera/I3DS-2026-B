@@ -1,0 +1,10 @@
+.containerApp {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  min-height: 90vh;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -5,6 +5,7 @@ import Sobre from "./pages/Sobre";
 import Home from "./pages/Home";
 import Header from "./components/header/Header";
 import Contato from "./pages/Contato";
+import NaoEncontrada from "./pages/NaoEncontrada";
 import Footer from "./components/Footer/Footer";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/sobre" element={<Sobre />} /> {/* uma rota do sistema */}
         <Route path="/contato" element={<Contato />} />
+        <Route path="*" element={<NaoEncontrada />} />
       </Routes>
       </div>
 
