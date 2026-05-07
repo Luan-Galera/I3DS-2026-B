@@ -1,0 +1,39 @@
+.card {
+    display: flex;
+    background-color: #2983AA;
+    max-width: 70%;
+    margin-top: 20px;
+}
+.image {
+    width: 25%;
+}
+.info {
+    font-family: "Inter", sans-serif;
+    text-align: left;
+}
+.title {
+    line-height: 1;
+    margin-bottom: 0;
+}
+.genre {
+    margin-top: 0;
+    color: #C7C7C7;
+    line-height: 1;
+}
+.actualPrice {
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  color: #beeb14;
+}
+.button {
+  margin: 10px;
+  padding: 10px;
+  border: none;
+  background-color: #549300;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}

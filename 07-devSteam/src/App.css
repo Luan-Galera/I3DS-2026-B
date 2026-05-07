@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #1b2838;
+  color: white;
+  text-align: center;
+  align-items: center;
+}
+
+.promoText {
+  font-family: "Inter", sans-serif;
+}
+
+.outrosJogosText {
+  font-family: "Inter", sans-serif;
+}
